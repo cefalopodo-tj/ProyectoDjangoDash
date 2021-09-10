@@ -1,7 +1,9 @@
 #36:57 Pegamos el código de git con el código para gráfico con dash
 #Llevaremos este dash a la carpeta templates. Vamos a welcome.html 37:51
-import dash_core_components as dcc
-import dash_html_components as html
+# Deprecated: import dash_core_components as dcc
+from dash import dcc
+# Deprecated: import dash_html_components as html
+from dash import html
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 from django_plotly_dash import DjangoDash

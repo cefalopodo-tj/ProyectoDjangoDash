@@ -19,4 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    #29:30 Viniendo de settings.html añadimos y volvemos a settings.py (seguimos copiando y pegando de: https://django-plotly-dash.readthedocs.io/en/latest/installation.html)
+    #Previamente instalamos en el entorno virtual: pip install channels daphne redis django-redis channels-redis (30:08) y vamos a settings - INSTALLED_APPS
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]

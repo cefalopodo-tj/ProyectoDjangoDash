@@ -1,3 +1,4 @@
+from .wsgi import *
 #32:04 importamos el protocolo, con lo que la indexación está OK
 from channels.routing import ProtocolTypeRouter
 

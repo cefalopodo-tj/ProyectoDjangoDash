@@ -1,0 +1,160 @@
+
+<!-- Agregamos un tema a este archivo. Previamente creamos una nueva carpeta llamada patials (en la misma carpeta templates) 
+Extraemos desde la página startbootstrap.com/themes/sb-admin2/   :
+De los ficheros extraidos (en Escritortio/tema_bootstrap) sólo necesitaremos: 1 La carpeta CSS, 2 images (img), js, scss y el archivo index.html
+Creamos la carpeta static y metemos las 4 carpetas
+index.html lo meteremos en la carpeta templates
+
+Luego pasaremos a settings (12:22)-->
+
+<!-- 22:35 Viniendo de haber copiado todo el archivo index.html lo pegaremos aquí habiéndolo vaciado (NO TENIA NADA DE CONTENIDO PREVIAMENTE) -->
+
+<!--23:45 Traemos los archivos estáticos a la carpeta principal para poder cargarlos sobre la aplicación principal
+ (ejemplo en el head - Customs fonts for this template-->
+{% load static %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+        <!-- 24:39 Como no teníamos la carpeta vendor dentro de la carpeta static y vemos que aparece en el link nos la traemos del tema bootstrap a esa carpeta
+         - y metemos llave, porcentaje etc
+        Tras añadir archivos usar: (venv) C:\Users\alaza\ProyectoDjangoDash>python manage.py collectstatic - y luego pulsaremos "yes"-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+            <!-- 25:15 Lo mismo que arriba llaves, comillas y porcentajes-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- TRAS settings.py (19:27) CORTAMOS TODO EL SIDEBAR (de <ul> a </ul>) Y LO PEGAMOS EN partials - _sidebar.html PARA DIVIDIR EL ARCHIVO
+        luego hacemos lo mismo con la topbar (20:25)-->
+        <!-- Sidebar -->
+
+            <!--22:56 Añadimos el archivo sidebar.html-->
+            {% include 'partials/_sidebar.html' %}
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+        <!-- (Desde 20:25)Cortamos y pegamos todo el topbar y lo pegamos en partials - _topbar.html
+        (hasta 20:37-->        
+                <!-- Topbar -->
+                    <!-- 23:13 Añadimos el topbar-->
+                    {% include 'partials/_topbar.html' %}
+
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
+                    <!-- 22:02 AÑADIMOS UN DIV Y LE DAMOS COMO NOMBRE DE CLASE  "row"-->
+                    <div class="row">
+                        <!-- Dentro añadimos el contenido donde cualquier otra aplicacióno cq template se renderizará-->
+                        {% block content %}
+
+                        {% endblock %}
+                    </div>
+                    <!-- 22:27 Copiamos todo el archivo, vamos a base.html, donde borramos todo el contenido y lo pegamos-->
+
+                    <!-- Content Row -->
+        <!-- Borramos todo el content row 20:48 - SI QUEREMOS, EN tema_bootstrap (escritorio) tenemos gráficos para meter aquí como en la plantilla:
+        https://startbootstrap.com/theme/sb-admin-2 PARA VERLO-->
+                                      
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            
+            <!-- 21:37 PASAMOS EL FOOTER A partials - _footer.html-->
+            <!-- 23:22 Añadimos el footer-->
+            {% include 'partials/_footer.html' %}
+
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+
+    <!--25:30 Hacemos lo mismo que en el head convirtiendo todos los scripts en estáticos-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+    <!-- 26:40 Tras esto vamos albertolazaroru@gmail.com archivo welcome.html del proyecto (no de la aplicación) -->
+
+</body>
+
+</html>

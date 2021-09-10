@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+#29:13 vinienbdo de welcome.html. Pegamos 'django_plotly_dash.apps.DjangoPlotlyDashConfig' y vamos a urls.py de la carpeta static
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,7 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
-
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    #30:24 Viniendo de urls.py añadimos
+    'channels',
+    'channels_redis',
+    #Luego vamos más abajo (justo antes de "static")
+    'clear_cache'
 ]
 
 MIDDLEWARE = [
@@ -133,6 +139,38 @@ USE_L10N = True
 
 USE_TZ = True
 
+#30:56 Configuramos el tema Bootstrap para cq página con aplicaciones dash - plotly
+CRISPY_TEMPLATE_PACK='bootstrap4'
+#31:19 configuramos la ruta para canales, etc, luego crearemos un enrutamiento
+ASGI_APPLICATION='ProyectoDjangoDash.routing.application'
+#Luego vamos a la izq en VSC ProyectoDjangoDash (debajo de "home") - botón der - new file - routing.py - Y entramos a ese archivo 31:58
+
+#32:50 Verificamos las capas de canal
+CHANNEL_LAYERS= {
+    'default':{
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts':[('127.0.0.1',6412),],
+        }
+    }
+}
+#Luego creamos una carpeta que encuentre archivos estáticos 34:02
+STATICFILES_FINDERS=[
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+]
+#35:14
+PLOTLY_COMPONENTS =[
+    'dash_core_components',
+    'dash_html_components',
+    'dash_renderer',
+
+    'dpd_components',
+]
+#36:10 vamos a crear una carpeta nuevo en "home" - dash_apps, y luego  dentro una nueva carpeta (finished_apps) ...
+# y dentro un archivo (simpleexample.py) - Vamos a este archivo 36:41
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -148,6 +186,9 @@ STATICFILES_DIRS =[
     os.path.join(BASE_DIR, 'ProyectoDjangoDash/static')
 ]
 # Y nos vamos a DATABASES (más arriba)
+
+#Para que los gráficos no salgan en 2 pantallas diferentesFirefox o directamente no se abran en Chrome
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

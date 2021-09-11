@@ -30,7 +30,7 @@ def home(requests):
     #48:25 Creamos el contexto
     context={
         #Metemos la función de arriba
-        'plot': scatter()
+        'plot1': scatter()
     }
 
     # 48:45 añadimos el contexto al renderizado - Vamos a welcome.html

@@ -18,7 +18,7 @@ def home(requests):
         )
         #Configuramos el layout
         layout=dict(
-            title='Gráfico de dispersión',
+            title='Evolución llamadas por encuesta',
             xaxis=dict(range=[min(x1), max(x1)]),
             yaxis= dict(range= [min(y1), max(y1)])
         )

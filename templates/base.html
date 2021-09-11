@@ -25,7 +25,7 @@ Luego pasaremos a settings (12:22)-->
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Al Topo</title>
 
     <!-- Custom fonts for this template-->
         <!-- 24:39 Como no teníamos la carpeta vendor dentro de la carpeta static y vemos que aparece en el link nos la traemos del tema bootstrap a esa carpeta
@@ -74,23 +74,35 @@ Luego pasaremos a settings (12:22)-->
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Nombre de estudio</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
+
+                    <!--Añadimos los botones-->
+                    <div class ="row">
+                        {% include 'partials/_buttons.html' %} 
+                    </div>
+
                     <!-- 22:02 AÑADIMOS UN DIV Y LE DAMOS COMO NOMBRE DE CLASE  "row"-->
                     <div class="row">
-                        <!-- Dentro añadimos el contenido donde cualquier otra aplicacióno cq template se renderizará-->
+                        <!-- Dentro añadimos el contenido donde cualquier otra aplicación o cq template se renderizará-->
+                        
                         {% block content %}
-
+                        
                         {% endblock %}
                     </div>
                     <!-- 22:27 Copiamos todo el archivo, vamos a base.html, donde borramos todo el contenido y lo pegamos-->
 
+                    <div class ="row">
+                        {% include 'partials/_encuestadores_gr_fila.html' %} 
+                    </div>
+                     
+
                     <!-- Content Row -->
         <!-- Borramos todo el content row 20:48 - SI QUEREMOS, EN tema_bootstrap (escritorio) tenemos gráficos para meter aquí como en la plantilla:
         https://startbootstrap.com/theme/sb-admin-2 PARA VERLO-->
-                                      
+                          
                 </div>
                 <!-- /.container-fluid -->
 
@@ -100,16 +112,21 @@ Luego pasaremos a settings (12:22)-->
             <!-- Footer -->
             
             <!-- 21:37 PASAMOS EL FOOTER A partials - _footer.html-->
-            <!-- 23:22 Añadimos el footer-->
-            {% include 'partials/_footer.html' %}
-
-            <!-- End of Footer -->
+            
 
         </div>
         <!-- End of Content Wrapper -->
 
+        
+
     </div>
     <!-- End of Page Wrapper -->
+
+    <!-- 23:22 Añadimos el footer-->
+    {% include 'partials/_footer.html' %}
+
+    <!-- End of Footer -->
+
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -136,6 +153,8 @@ Luego pasaremos a settings (12:22)-->
         </div>
     </div>
 
+    
+
     <!-- Bootstrap core JavaScript-->
 
     <!--25:30 Hacemos lo mismo que en el head convirtiendo todos los scripts en estáticos-->
@@ -154,7 +173,7 @@ Luego pasaremos a settings (12:22)-->
     <!-- Page level custom scripts -->
     <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
     <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
-    <!-- 26:40 Tras esto vamos albertolazaroru@gmail.com archivo welcome.html del proyecto (no de la aplicación) -->
+    <!-- 26:40 Tras esto vamos al archivo welcome.html del proyecto (no de la aplicación) -->
 
 </body>
 

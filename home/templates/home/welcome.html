@@ -9,16 +9,20 @@ Borramos todo lo que había en el documento y vamos a heredar de ese archivo, ca
 {% block content %}
 {% load plotly_dash %}
 
-<h1>Página de inicio</h1>
+<h2>Gráficos con Dash</h1>
 <!-- 37:56 venimos de simpleexample.py, donde tenemos un gráfico-->
     <div class="{% plotly_class name='SimpleExample' %} card" style="height:100%; width: 100%;">
-        {% plotly_app name='SimpleExample' ratio=0.40 %}
+        {% plotly_app name='SimpleExample' ratio=0.35 %}
     </div>
     <!--En 39:31 vamos a home-urls.py-->
 
-<!--48:55 Añadimos el gráfico scatter creado en views.py. Le metemos el nombre del context que llamará a la función scatter en views-->
+<!--48:55 Añadimos el gráfico scatter creado en views.py. Le metemos el nombre del context que llamará a la función scatter en views
 <br>
-    {{plot1 | safe }}
-
+    {{plot1 | safe }} SI NO FUNCIONA VOLVER A PONER ESTO Y ELIMINAR LO DE ABAJO!!!! -->
+    <div class="{% plotly_class name='evolution' %} card" style="height:50%; width: 60%;">
+        {% plotly_app name='evolution' ratio=0.30 %}
+    </div>
 
 {% endblock %}
+
+

@@ -14,7 +14,7 @@ app = DjangoDash('SimpleExample', external_stylesheets=external_stylesheets)
 
 
 app.layout = html.Div([
-    html.H2('Evolución de las encuestas realizadas'),
+    html.H4('Evolución de las encuestas realizadas'),
     dcc.Graph(id='slider-graph', animate=True, style={"backgroundColor": "#1a2d46", 'color': '#ffffff'}),
     dcc.Slider(
         id='slider-updatemode',
@@ -30,6 +30,8 @@ app.layout = html.Div([
 @app.callback(
                Output('slider-graph', 'figure'),
               [Input('slider-updatemode', 'value')])
+
+
 def display_value(value):
 
 

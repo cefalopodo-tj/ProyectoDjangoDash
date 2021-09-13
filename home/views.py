@@ -6,6 +6,7 @@ import plotly.graph_objs as go
 
 def home(requests):
     #44:57 Vista para renderizar
+    """
     def scatter():
         #Eje abcisas
         x1=[1,2,3,4]
@@ -27,14 +28,16 @@ def home(requests):
         #Creamos el plot
         plot_div= plot(fig, output_type ='div', include_plotlyjs=False)
         return plot_div
+
+
     #48:25 Creamos el contexto
     context={
         #Metemos la función de arriba
         'plot1': scatter()
-    }
+    }"""
 
     # 48:45 añadimos el contexto al renderizado - Vamos a welcome.html
-    return render(requests, 'home/welcome.html', context)
+    return render(requests, 'home/welcome.html')#, context)
 
 
 

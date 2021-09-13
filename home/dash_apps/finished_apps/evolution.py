@@ -8,38 +8,61 @@ from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 from django_plotly_dash import DjangoDash
 
+import pandas as pd
+import numpy as np
+
+import plotly.express as px
+
+
+lst = [["Manolo",12.23,9],["Jack",15.08,7], ["Lola", 11.14,11]]
+df = pd.DataFrame(lst, columns = ['Nombre','Duración media','Encuestas_realizadas'])
+
+lista_nombres=list(df['Nombre'].unique())
+
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = DjangoDash('evolution', external_stylesheets=external_stylesheets)
 
 
-app.layout = html.Div([
-    html.H4('Evolución de teléfonos por encuesta'),
-    dcc.Graph(id='graph', animate=True, style={"backgroundColor": "#1a2d46", 'color': '#ffffff'}),
-    dcc.Slider(
-        id='slider-updatemode',
-        marks={i: '{}'.format(i) for i in range(20)},
-        max=20,
-        value=2,
-        step=1,
-        updatemode='drag',
-    ), 
-])
+
+app.layout = html.Div(
+    children=[
+    html.H4('Encuestas realizadas por encuestador'),
+    dcc.Dropdown(id='my-dropdown', multi=True, #Con multi=True cargamos los diferentes nombres en el gráfico
+        options=[{'label':x, 'value':x} for x in sorted(df['Nombre'].unique())],
+        value=["Manolo","Jack","Lola"]#lista_nombres #Lista para elegir los nombres que queramos elegir
+     ),
+    html.Button(id='my-button', n_clicks=0, children="Elige encuestadores"),
+    dcc.Graph(id='graph-output', figure={}), 
+    html.Div(id='sentence-output', children=["Nombre abajo en la gráfica"], style={}),
+    ]
+)
 
 @app.callback(
-               Output('graph', 'figure'),
-               [Input(component_id='slider-updatemode', component_property='value')]
+               Output(component_id='graph-output', component_property='figure'),
+               [Input(component_id='my-dropdown', component_property='value')],
             )
 
+#Argumento obligatorio. Se tiene que referir a los inputs o a los states de callback (una lista).
+#  Ej:2 inputs, 2 argumentos
+def update_graph(val_chosen):
+    if len(val_chosen) >0:
+        print(f"valor del nombre introducido: {val_chosen}")
+        dff=df[df['Nombre'].isin(val_chosen)]
+        fig=px.pie(dff, values='Encuestas_realizadas', names='Nombre', title='Gráfica por nombre y encuestas realizadas')
+        fig.update_traces(textinfo='value+percent').update_layout(title_x=0.5)
+        return fig
+    elif len(val_chosen) ==0:
+        raise dash.exceptions.PreventUpdate
 
-def scatter(value):
+"""
     #Eje abcisas
-    x1=[1,2,3,4]
+    #x1=[1,2,3,4]
     #Eje ordenadas
-    y1=[30,35,25,45]
+    #y1=[30,35,25,45]
     #Configuramos el rastro
-    graph2=go.Scatter(
+    graph=go.Scatter(
         x=x1,
         y=y1
     )
@@ -55,6 +78,6 @@ def scatter(value):
     #Creamos el plot
     #plot_div= plot(fig, output_type ='div', include_plotlyjs=False)
     return {'data': [graph2], 'layout': layout2}
-    
+"""    
 
 # IMPORTANTE IMPORTAR EN urls.py!!!!!

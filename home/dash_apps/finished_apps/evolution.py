@@ -24,7 +24,7 @@ app.layout = html.Div([
         value=2,
         step=1,
         updatemode='drag',
-    ),
+    ), 
 ])
 
 @app.callback(
@@ -33,7 +33,7 @@ app.layout = html.Div([
             )
 
 
-def scatter():
+def scatter(value):
     #Eje abcisas
     x1=[1,2,3,4]
     #Eje ordenadas

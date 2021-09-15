@@ -5,7 +5,7 @@ import plotly.graph_objs as go
 # Create your views here.
 
 def home(requests):
-    #44:57 Vista para renderizar
+    #44:57 Vista para renderizar (ejempo de evolution.py)
     """
     def scatter():
         #Eje abcisas
@@ -40,5 +40,7 @@ def home(requests):
     return render(requests, 'home/welcome.html')#, context)
 
 
+def encuestadores(requests):
+    return render(requests, 'home/encuestadores.html')
 
 
